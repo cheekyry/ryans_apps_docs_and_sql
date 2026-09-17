@@ -5,7 +5,7 @@ technical reference. Replaces every prior per-app handover, project-
 instructions doc, and standalone rules document — see "What this replaces"
 at the very end for the full list.*
 
-**Last updated: 15:51, 17 September 2026 (UK time)** — confirmed directly by Ryan.
+**Last updated: 23:10, 17 September 2026 (UK time)** — confirmed directly by Ryan.
 
 ---
 
@@ -27,24 +27,28 @@ On **RESUME**, read Section 2 first (the rules), then jump straight to whichever
 *SOURCE: `overview.md` · `ways-of-working.md` · `RESUME___FINISH_Commands_in_ClaudeAI.md` · `Ryan_s_Manual_Consolidation.md` · `RH-Consolidated-Documentation-LATEST.md` (B§0)*
 
 
-All 4 repos now live under one local root:
+**⚠️ Two devices, two path styles — confirm which one Ryan is on at the start of every RESUME (standing rule, 2.8/2.11) before giving any path or command.** Both are given side by side everywhere in this section from now on.
+
+All 5 repos now live under one local root:
 `\\Mac\Home\Desktop\Claude.AI Projects\ryans_apps\` (Windows VM UNC path)
 `/Users/cheekyry/Desktop/Claude.AI Projects/ryans_apps/` (Mac Terminal)
 
-| App | Repo | Live URL(s) | Local subfolder |
-|---|---|---|---|
-| BA PowerSuite (dev) | `github.com/cheekyry/bapowersuite_dev` | `bapowersuite-dev.vercel.app` (also `rhayes-bapowersuite.vercel.app`) | `ryans_apps\bapowersuite_dev` *(inferred from naming convention — not personally verified this session; confirm at first BA PowerSuite session)* |
-| BA PowerSuite (customer) | `github.com/cheekyry/bapowersuite_customer` | `bapowersuite-customer.vercel.app` (also `customer-bapowersuite.vercel.app`) | `ryans_apps\bapowersuite_customer` *(same caveat)* |
-| Personal Suite | `github.com/cheekyry/personalsuite` | `rhayes-personalsuite.vercel.app` (also `rhayes-personal-suite.vercel.app`) | `ryans_apps\personalsuite` ✅ *verified live 17 Sep* |
-| Shared API Gateway | `github.com/cheekyry/shared_api_gateway` | `shared-api-gateway.vercel.app` (also `rhayes-api-gateway.vercel.app`, `api.bapowersuite.com`) | `ryans_apps\shared_api_gateway` ✅ *verified live 17 Sep* |
+| App | Repo | Live URL(s) | Local subfolder (Windows VM) | Local subfolder (Mac Terminal) |
+|---|---|---|---|---|
+| BA PowerSuite (dev) | `github.com/cheekyry/bapowersuite_dev` | `bapowersuite-dev.vercel.app` (also `rhayes-bapowersuite.vercel.app`) | `ryans_apps\bapowersuite_dev` *(inferred from naming convention — not personally verified; confirm at first BA PowerSuite session)* | `ryans_apps/bapowersuite_dev` *(same caveat)* |
+| BA PowerSuite (customer) | `github.com/cheekyry/bapowersuite_customer` | `bapowersuite-customer.vercel.app` (also `customer-bapowersuite.vercel.app`) | `ryans_apps\bapowersuite_customer` *(same caveat)* | `ryans_apps/bapowersuite_customer` *(same caveat)* |
+| Personal Suite | `github.com/cheekyry/personalsuite` | `rhayes-personalsuite.vercel.app` (also `rhayes-personal-suite.vercel.app`) | `ryans_apps\personalsuite` ✅ *verified live 17 Sep* | `ryans_apps/personalsuite` *(not personally verified — VM path only was confirmed live)* |
+| Shared API Gateway | `github.com/cheekyry/shared_api_gateway` | `shared-api-gateway.vercel.app` (also `rhayes-api-gateway.vercel.app`, `api.bapowersuite.com`) | `ryans_apps\shared_api_gateway` ✅ *verified live 17 Sep* | `ryans_apps/shared_api_gateway` *(same caveat)* |
+| **Docs & SQL** *(new, 17 Sep)* | `github.com/cheekyry/ryans_apps_docs_and_sql` | — *(not deployed — reference-only repo)* | `ryans_apps\ryans_apps_docs_and_sql` ✅ *verified live 17 Sep* | `ryans_apps/ryans_apps_docs_and_sql` *(not personally verified — VM path only was confirmed live)* |
 
-`ryans_apps\docs\` — handover docs live here (this file goes here).
-`ryans_apps\brand_assets\` — real brand assets (logo etc).
-`ryans_apps\push_ryans_apps.ps1` — one script, pushes all 4 repos in one command, skipping any with nothing changed.
+**Inside the Docs & SQL repo:** `docs\ryans_apps_handover_consolidated.md` (this file) and `supabase_sql\` (all Supabase migration scripts — see the table below). These two folders used to be separate top-level folders directly under `ryans_apps\`; as of 17.09.2026 they're merged into this one repo so both get backed up to GitHub, not just kept locally.
+
+`ryans_apps\brand_assets\` — real brand assets (logo etc) — local only, not in any repo.
+`ryans_apps\push_ryans_apps.ps1` — one script, pushes all **5** repos in one command, skipping any with nothing changed. Local only, not uploaded to Context (a deployment script isn't something the apps need to run) — updated 17.09.2026 to include the new 5th repo.
 
 **Supabase:** one project shared by BA PowerSuite and Personal Suite — `rhayes-suite`, ID `qnpxprxhaciwtchrdqzn`, West EU/Ireland. Unaffected by the folder/repo/domain reorg (Supabase project identity is separate from any of that).
 
-**git user.email** in all 4 repos: `ryan.hayes@bapowersuite.com` — verified correctly set in all 4 on 16.09.2026.
+**git user.email** in all 5 repos: `ryan.hayes@bapowersuite.com` — verified correctly set in the original 4 on 16.09.2026, and in the new 5th repo on 17.09.2026.
 
 **Standard deployment sequence** (one command per code block, always):
 ```
@@ -63,6 +67,8 @@ Mac Terminal: same, but `cd` with escaped spaces instead of `pushd`, and full li
 
 **Before running `push_ryans_apps.ps1` in a fresh PowerShell window:** run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` first, every time — only lasts that one window.
 
+**New-repo setup checklist** (for any 6th repo etc. in future — followed once already for `ryans_apps_docs_and_sql`, 17.09.2026): create the empty GitHub repo first (no README/gitignore/license — avoids an initial conflict with existing local content) → locally `git init` → add a `.gitignore` for `.DS_Store` → confirm `git config user.email` is correct → `git add .` → expect and resolve the one-time "detected dubious ownership" warning with the `git config --global --add safe.directory ...` command git itself provides → commit → `git branch -M main` (the default `master` doesn't match convention) → `git remote add origin [url]` → `git push -u origin main`. **If push fails with a 403 permission error**, check whether GitHub authentication is via a fine-grained Personal Access Token scoped to specific repos (rather than "All repositories") — a brand new repo won't automatically be included in that scope, and needs adding to the token's repository list before it'll authenticate. *Real incident, 17.09.2026: exactly this happened creating `ryans_apps_docs_and_sql`.*
+
 ---
 ---
 
@@ -72,7 +78,8 @@ Mac Terminal: same, but `cd` with escaped spaces instead of `pushd`, and full li
 ## 2.1 Command discipline
 *SOURCE: `ways-of-working.md`*
 
-- **ONE COMMAND PER MESSAGE, ALWAYS, NO EXCEPTIONS** — never give 2+ terminal/PowerShell commands in one reply, even for "quick verification checks." One command, wait for actual pasted output, then the next.
+- **ONE COMMAND PER MESSAGE, ALWAYS, NO EXCEPTIONS** — never give 2+ terminal/PowerShell commands in one reply, even for "quick verification checks." One command, wait for actual pasted output, then the next. This was the single most repeated correction in the session that built this project.
+- **Exception, added 17.09.2026:** for a repetitive sequence Ryan has already run many times and knows well (the standard `pushd`/`git add`/`git commit`/`git push` deployment sequence, specifically) — give all the commands together in one reply, but still as separate individual code blocks (one command per block) for easy copy-paste, rather than one at a time waiting for output between each. This does NOT extend to diagnostic/verification steps, first-time sequences, or anything where the output of one command could change what the next should be — those stay strictly one-at-a-time.
 - Git push/deployment commands delivered in individual code blocks after every file delivery, without exception.
 
 ## 2.2 Naming & format
@@ -133,7 +140,7 @@ When a chat limit is approaching, when starting a new chat, or on FINISH: produc
 *SOURCE: `Session-Workflow-Rule-RESUME-FINISH.md` (originating document) · `RESUME___FINISH_Commands_in_ClaudeAI.md` · `ways-of-working.md` · `RH-Consolidated-Documentation-LATEST.md` (A§2, A§3)*
 
 **On "RESUME" (any case):**
-1. Ask which device Ryan is on right now (MacBook/Windows VM PowerShell, or iPad Working Copy+Textastic) — never assume from a previous session.
+1. **Always ask which device Ryan is on right now** — Mac Terminal, Windows VM (PowerShell), or iPad Working Copy+Textastic — every single time, never assumed from a previous session (device can change day to day or mid-day). This determines which path style (`\\Mac\Home\...` vs `/Users/cheekyry/...`) and command syntax to use for the rest of the session — see Section 1's paired path columns.
 2. Ask Ryan to confirm he's pulled the latest on that device.
 3. Confirm which app/repo is in scope, and that current working files are uploaded to Context — if either is missing, **stop and ask for both.**
 4. Read this handover and the uploaded working file(s) fresh from Context — not from memory of prior conversation.
@@ -212,6 +219,26 @@ At the end of every development session: (1) pull latest on whichever device is 
 
 Never wait for Ryan to ask whether Context needs refreshing. Flag it proactively after a significant round of file changes, before an important new chat, or whenever live files have meaningfully diverged from Context — and always spell out the complete steps: which files changed, the exact commands to rebuild locally, and a reminder to re-upload.
 
+## 2.16 `vercel.json` dual-delivery rule
+*SOURCE: this session (17.09.2026)*
+
+Whenever any `vercel.json` is created or changed, always deliver **two things**, every time:
+1. The file named literally `vercel.json`, with an explicit statement of which of the 4 app folders it belongs to — this is the one Ryan places locally before `pushd`/`git push`.
+2. A copy under its distinct Context-safe name (`vercel_bapowersuite_dev.json`, `vercel_bapowersuite_customer.json`, `vercel_personalsuite.json`, or `vercel_shared_api_gateway.json`) — this is the one that goes to Context. **Never suggest uploading a file literally named `vercel.json` to Context** — Context is a flat file space, so a second same-named upload would silently overwrite the first with no warning which app it was for.
+
+## 2.17 In-file "last updated" header convention
+*SOURCE: this session (17.09.2026)*
+
+Every actual app file gets a "last updated" stamp, following the confirmed-timestamp rule (2.3) — but the mechanism differs by file type, since JSON has no comment syntax:
+- **`.html` / `.js` / `.sql`** — a commented first line: `<filename> - last updated dd.mm.yyyy, HH:mm UK` (`<!-- -->` for HTML, `//` for JS, `--` for SQL).
+- **`package.json` / `manifest.json`** — an added `"_lastUpdated": "dd.mm.yyyy, HH:mm UK"` field. Both formats tolerate unrecognised keys, so this is genuinely safe.
+- **`vercel.json`** — deliberately excluded. This file is load-bearing and strictly parsed by Vercel to configure routing; unlike the other two JSON files, its tolerance for an unrecognised key has not been verified, and the risk of guessing wrong on a routing-critical config isn't worth it. Its timestamp is stated in the delivery message only, never embedded in the file.
+
+## 2.18 Docs & SQL are now version-controlled too
+*SOURCE: this session (17.09.2026)*
+
+As of 17.09.2026, `docs\` and `supabase_sql\` are no longer local-only folders — they're merged into their own 5th repo, `ryans_apps_docs_and_sql` (see Section 1 for full detail). Reasoning: `supabase_sql\` was a real single-point-of-failure (Ryan's only record of schema history, no backup beyond his Mac), and neither folder naturally belongs inside any one of the 4 app repos since both span multiple apps. `push_ryans_apps.ps1` was extended the same day to include this 5th repo in its loop.
+
 ---
 ---
 
@@ -220,6 +247,8 @@ Never wait for Ryan to ask whether Context needs refreshing. Flag it proactively
 
 *Most recent first. Older entries condensed once fully superseded; nothing here duplicates Section 4's current-state detail — this is sequence, not status.*
 
+- **23:10, 17.09.2026** — Session closed. `push_ryans_apps.ps1` re-delivered with the 5th repo added, confirmed placed and verified locally. This document's own update cycle completed and confirmed pushed to its new home (`ryans_apps_docs_and_sql`) before being re-uploaded to Context — the first real end-to-end test of the new docs/SQL repo. One more command-discipline refinement added (2.1): repetitive, well-known push sequences can now be given as one message with separate copy-paste blocks, rather than strictly one command at a time.
+- **23:00, 17.09.2026** — Full local-vs-Context cross-check confirmed a clean match both ways (30 Context files ↔ local folders, only `icon.svg`/`push_ryans_apps.ps1` correctly local-only). `ryans_apps_merge_plan.md` deleted from Context (job done). `_cors.js` and `personal_football_session_table.sql` — flagged as missing two sessions ago — re-delivered and confirmed uploaded. **Created a 5th repo, `ryans_apps_docs_and_sql`**, merging the local-only `docs\` and `supabase_sql\` folders into one version-controlled repo (hit and resolved a fine-grained PAT scope issue — a new repo isn't automatically covered by an existing token's repository allowlist). `push_ryans_apps.ps1` updated to include it. Three new standing rules established: `vercel.json` dual-delivery (2.16), in-file timestamp headers with a JSON-comment-syntax exception (2.17), and this docs/SQL git-tracking decision itself (2.18).
 - **15:51, 17.09.2026** — Uploaded all ~19 remaining documents from the local "Claude - Handovers, Instructions & Memory" folder. Read all 26 documents (including this doc's own prior draft and `RH-Consolidated-Documentation-LATEST.md`, itself an earlier full consolidation of 18 documents into Parts A–D). Consolidated everything into this single document, confirmed with Ryan that BA PowerSuite's backlog and Personal Suite's ML prediction tracking are both still exactly as their source documents describe (nothing touched since), and confirmed dropping the verbatim 22-theme-config backup appendix (superseded by the planned theme-builder feature, logged in 4.1's backlog) since the live app's `THEMES` array is the real source of truth.
 - **03:30, 17.09.2026** — Previous session closed. Cross-device state persistence for Personal Suite's Football tab (Scout→Build) confirmed working end-to-end, laptop→iPad. `shared_api_gateway`'s CORS fix and the `_cors.js` refactor confirmed working across all 3 frontends. Decided to retire the per-app handover pattern in favour of this single document.
 - **17.09.2026, earlier** — Diagnosed and fixed `shared_api_gateway/api/fixtures.js`'s stale CORS allowlist (broke Football fixtures for every competition at once after the repo/domain reorg). Extracted the duplicated CORS logic out of all 8 gateway endpoints into a new shared `api/_cors.js` module. Built cross-device state persistence for Personal Suite (new `personal_football_session` table; hit and fixed a real RLS-vs-GRANT permissions gotcha along the way).
@@ -430,7 +459,7 @@ AI-powered analysis via the gateway; fixture *data* from API-Football. Live tab 
 
 **ML prediction tracking (`personal_predictions`) — fully built, confirmed working (11 Sep session, reconfirmed accurate 17.09.2026):**
 - "📝 Log all predictions" on Scout results logs the main Home/Draw/Away call *and* every structured market tip, grouped by fixture. Free-text main predictions are translated to canonical Home/Away/Draw by matching real team names — falls back to ungraded raw text if genuinely ambiguous, never guesses.
-- Market-tip format tightened to exact canonical market/selection pairs; grading  made lenient as a safety net for older data/slip-ups.
+- Market-tip format tightened to exact canonical market/selection pairs; grading made lenient as a safety net for older data/slip-ups.
 - Grading coverage: Match Result, BTTS (+ 1st/2nd half variants, Team-to-Score-in-Both-Halves, Score-in-Both-Halves — these were a real bug, now correctly distinguished from plain BTTS), Both-Teams-to-Score-&-Result, Asian/European Handicap, Corners/Cards/Player markets (selective data fetch to avoid rate limits; player markets need 80%+ fuzzy-name-match confidence or stay manual).
 - **Permanently manual by design, not a bug:** First/Last Goalscorer, First Corner, First Card (need event-timing data this app doesn't fetch), Bet Builder, free text.
 - "🔄 Check results" (same review-then-apply-all pattern as bets) also stores the real final score, enabling drilldown. "🧩 Fill in missing scores" backfills anything graded before scores were saved.
